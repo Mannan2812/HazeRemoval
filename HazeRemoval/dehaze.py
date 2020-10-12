@@ -40,6 +40,7 @@ class dehaze:
         refinedT=self.getRefineTransmission()
         atmosphere=self.getAtmosphericLight()
         image=self.image
+        thresholdT=self.thresholdT
         clipped_t = np.clip(refinedT, a_min=thresholdT, a_max=1.0)
         tiled_t = np.zeros_like(image, dtype=np.float32) 
         for i in range(3):

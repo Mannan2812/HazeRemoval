@@ -13,7 +13,15 @@ class dehaze:
         self.image = image
     
     def getDarkChannel(self):
-        print(self.image)
+        image=self.image
+        dimension_x, dimension_y, dimension_z = image.shape
+        darkchannel_prior = np.zeros((dimension_x, dimension_y), dtype=np.float32)
+        padded_img = np.pad(image, ((self.patchSize // 2, self.patchSize // 2),
+                          (self.patchSize // 2, self.patchSize // 2), (0, 0)), 'edge')
+        for i, j in np.ndindex(darkchannel_prior.shape):
+            darkchannel_prior[i, j] = np.min(
+                padded_img[i:i + self.patchSize, j:j + self.patchSize, :])
+        return darkchannel_prior
     
     def getAtmosphericLight(self):
         image=self.image
@@ -51,4 +59,18 @@ class dehaze:
         print("Code Here")
 
     def getDehazedImage(self):
-        print("Code Here")
+        darkchannel_prior = self.getDarkChannel()
+        skimage.io.imsave(os.path.join(outdir, 'dark.jpg'), np.uint8(darkch))
+        atmosphere = self.getAtmosphericLight()
+        rawT = self.getRawTransmission()
+        refinedT=self.getRefineTransmission()
+        skimage.io.imsave(os.path.join(
+            outdir, 'raw_transmission.jpg'), (255 * raw_t).astype(np.uint8))
+        skimage.io.imsave(os.path.join(
+            outdir, 'refine_transmission.jpg'), (255 * refine_t).astype(np.uint8))
+        dehazed_img = self.getRadiance()
+        skimage.io.imsave(os.path.join(outdir, 'noequalize.jpg'),
+                      np.uint8(img_dehaze))
+        equalized_img = self.equalizeBrightness()
+        plt.show(block=False)
+        return equalized_img

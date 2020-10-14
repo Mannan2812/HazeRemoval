@@ -1,4 +1,10 @@
 import numpy as np
+from matplotlib import pyplot as plt
+import os
+import skimage.color
+import skimage.exposure
+import skimage
+import skimage.io
 from cv2.ximgproc import guidedFilter
 
 class dehaze:
@@ -7,7 +13,7 @@ class dehaze:
     top_p = 0.001
     patchSize = 15
     thresholdT = 0.1
-
+    outDir = "../Result/"
 
     def __init__(self, image):
         self.image = image
@@ -60,18 +66,18 @@ class dehaze:
         print("Code Here")
 
     def getDehazedImage(self):
-        darkchannel_prior = self.getDarkChannel()
-        skimage.io.imsave(os.path.join(outdir, 'dark.jpg'), np.uint8(darkch))
+        darkchannelPrior = self.getDarkChannel()
+        skimage.io.imsave(os.path.join(self.outDir, 'dark.jpg'), np.uint8(darkchannelPrior))
         atmosphere = self.getAtmosphericLight()
         rawT = self.getRawTransmission()
         refinedT=self.getRefineTransmission()
         skimage.io.imsave(os.path.join(
-            outdir, 'raw_transmission.jpg'), (255 * raw_t).astype(np.uint8))
+            self.outDir, 'raw_transmission.jpg'), (255 * rawT).astype(np.uint8))
         skimage.io.imsave(os.path.join(
-            outdir, 'refine_transmission.jpg'), (255 * refine_t).astype(np.uint8))
+            self.outDir, 'refine_transmission.jpg'), (255 * refinedT).astype(np.uint8))
         dehazed_img = self.getRadiance()
-        skimage.io.imsave(os.path.join(outdir, 'noequalize.jpg'),
-                      np.uint8(img_dehaze))
+        skimage.io.imsave(os.path.join(self.outDir, 'noequalize.jpg'),
+                      np.uint8(dehazed_img))
         equalized_img = self.equalizeBrightness()
         plt.show(block=False)
         return equalized_img

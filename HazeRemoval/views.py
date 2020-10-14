@@ -9,6 +9,8 @@
 from django.shortcuts import HttpResponse,render
 def homepage(request):
     if request.method == 'POST':
-        pass
+        img = request.POST.get('filename')
+        print(img)
+        return render(request,'index.html')
     else:
         return render(request,'index.html')

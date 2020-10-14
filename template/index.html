@@ -9,6 +9,12 @@
 </head>
 <body>
     <h1>Hello! there</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="file" name="filename" id="myFile">
+        <input type="submit">
+    </form>
+
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>

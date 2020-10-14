@@ -12,7 +12,8 @@ class dehaze:
     top_p = 0.001
     patchSize = 15
     thresholdT = 0.1
-    outDir = "../Result/"
+    outDir = "./static/img/"
+    
 
     def __init__(self, image):
         self.image = image

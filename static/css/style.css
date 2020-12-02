@@ -1,3 +1,54 @@
-h1{
-    color: blue;
+
+.bodyCenterDiv {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -60px;
+}
+
+body {
+    background: #200122; 
+    background: -webkit-linear-gradient(to right, #6f0000, #200122);
+    background: linear-gradient(to right, #6f0000, #200122);
+    
+
+}
+
+
+
+.btn-upload {
+
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 40px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+ul {
+  margin-left: -35%;
+}
+
+ul li {
+  display : inline;
+  padding: 2px; 
+} 
+.btnCenter {
+  display: inline-block !important;
+  margin-left : 5% !important;
+}
+
+.imgResize img{
+  height : 100px;
+  width : 100px;
 }

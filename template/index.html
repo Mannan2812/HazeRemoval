@@ -8,24 +8,49 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
 <body>
-    <h1>Hello! there</h1>
     {% if result %}
-        <img src="{% static 'img/dark.jpg' %}" alt="">
+        {% ifequal imgToDisplay.0 1 %}
+        <img style = "height: 600px; width : 600px;" src="{% static 'img/dark.jpg' %}" alt="">
         <br>
-        <img src="{% static 'img/raw_transmission.jpg' %}" alt="">
+        {% endifequal %}
+        {% ifequal imgToDisplay.1 1 %}
+        <img style = "height: 600px; width : 600px;" src="{% static 'img/raw_transmission.jpg' %}" alt="">
         <br>
-        <img src="{% static 'img/refine_transmission.jpg' %}" alt="">
+        {% endifequal %}
+        {% ifequal imgToDisplay.2 1 %}
+        <img style = "height: 600px; width : 600px;" src="{% static 'img/refine_transmission.jpg' %}" alt="">
         <br>
-        <img src="{% static 'img/noequalize.jpg' %}" alt="">
+        {% endifequal %}
+        {% ifequal imgToDisplay.3 1 %}
+        <img style = "height: 600px; width : 600px;" src="{% static 'img/noequalize.jpg' %}" alt="">
         <br>
-        <img src="{% static 'img/equalize.jpg' %}" alt="">
+        {% endifequal %}
+        {% ifequal imgToDisplay.4 1 %}
+        <img style = "height: 600px; width : 600px;" src="{% static 'img/equalize.jpg' %}" alt="">
+        {% endifequal %}
     {% else %}
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit">
-        </form>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class = "bodyCenterDiv" >
+            <div class="upload-btn-wrapper">
+                <button class="btn-upload">Upload a file</button>
+                {{ form.as_p }}
+            </div>
+        
+            <div class = "">
+                <button class = "btn btn-primary btnCenter" type = "submit">DEHAZE</button>
+            </div>
+        </div>
+        
+        
+    </form>
     {% endif %}
+    <script>
+        document.querySelector("#id_img").onchange = function(){
+        console.log(this.files[0].name)
+        document.querySelector(".btn-upload").textContent = this.files[0].name;
+        }
+    </script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>

@@ -52,3 +52,16 @@ ul li {
   height : 100px;
   width : 100px;
 }
+
+#myProgress {
+  margin-left: -35%;
+  width: 100%;
+  background-color: grey;
+  visibility:hidden;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: green;
+}

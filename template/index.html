@@ -38,9 +38,14 @@
             </div>
         
             <div class = "">
-                <button class = "btn btn-primary btnCenter" type = "submit">DEHAZE</button>
+                <button class = "btn btn-primary btnCenter dehazeBtn" type = "submit">DEHAZE</button>
+            </div>
+            <br>
+            <div id="myProgress">
+                <div id="myBar"></div>
             </div>
         </div>
+        
         
         
     </form>
@@ -51,6 +56,9 @@
         document.querySelector(".btn-upload").textContent = this.files[0].name;
         }
     </script>
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+
 </body>
 </html>
